@@ -38,19 +38,23 @@ public class FolderSyncActivitiesImpl implements FolderSyncActivities {
 
     @Override
     public void copyFile(String sourceDir, String destDir, String fileName) {
-        Path source = Paths.get(sourceDir);
-        Path dest = Paths.get(destDir);
+        Path source = Paths.get(sourceDir, fileName);
+        Path target = Paths.get(destDir, fileName);
         Path temp = Paths.get(destDir, "." + fileName + ".part");
 
-        if (Files.exists(dest)) {
+        if (Files.exists(target)) {
             log.info("Skipping {} (already in {})", fileName, destDir);
             return;
         }
 
+        if (!Files.exists(source)) {
+            log.info("Skipping {} (no longer in {})", fileName, sourceDir);
+        }
+
         try {
             Files.copy(source, temp, StandardCopyOption.REPLACE_EXISTING);
-            Files.move(temp, dest, StandardCopyOption.ATOMIC_MOVE);
-            log.info("Copied {} -> {}", source, dest);
+            Files.move(temp, target, StandardCopyOption.ATOMIC_MOVE);
+            log.info("Copied {} -> {}", source, target);
         } catch (IOException e) {
             throw Activity.wrap(e);
         }
