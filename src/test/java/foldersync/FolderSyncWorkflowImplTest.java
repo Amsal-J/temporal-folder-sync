@@ -170,7 +170,7 @@ class FolderSyncWorkflowImplTest {
     @Test
     void keepsPolling_afterContinueAsNew() {
         startWorkflow(60, 2);                     // reset history every 2 loops
-        testEnv.sleep(Duration.ofSeconds(330));   // 5.5 minutes
+        testEnv.sleep(Duration.ofSeconds(330));   // 5.5 minutes.
 
         assertTrue(fake.scanIds.size() >= 5,
                 "expected at least 5 polls but got " + fake.scanIds.size());
