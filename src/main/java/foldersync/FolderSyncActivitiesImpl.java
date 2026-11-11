@@ -49,6 +49,7 @@ public class FolderSyncActivitiesImpl implements FolderSyncActivities {
 
         if (!Files.exists(source)) {
             log.info("Skipping {} (no longer in {})", fileName, sourceDir);
+            return;
         }
 
         try {
