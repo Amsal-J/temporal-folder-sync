@@ -1,0 +1,7 @@
+target/
+folder1/
+folder2/
+.git/
+.github/
+*.db
+.DS_Store
