@@ -8,7 +8,7 @@ import io.temporal.serviceclient.WorkflowServiceStubs;
 
 public class FolderSyncStarter {
     public static void main(String[] args) {
-        WorkflowServiceStubs service = WorkflowServiceStubs.newLocalServiceStubs();
+        WorkflowServiceStubs service = Shared.connect();
         WorkflowClient client = WorkflowClient.newInstance(service);
 
         WorkflowOptions options = WorkflowOptions.newBuilder()

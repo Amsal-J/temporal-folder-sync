@@ -7,7 +7,7 @@ import io.temporal.worker.WorkerFactory;
 
 public class FolderSyncWorker {
     public static void main(String[] args) {
-        WorkflowServiceStubs service = WorkflowServiceStubs.newLocalServiceStubs();
+        WorkflowServiceStubs service = Shared.connect();
         WorkflowClient client = WorkflowClient.newInstance(service);
         WorkerFactory factory = WorkerFactory.newInstance(client);
 
